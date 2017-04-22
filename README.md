@@ -14,5 +14,6 @@
 
 
 #Run sequelize cli
+
 `node_modules/.bin/secuelize XXXX`
 
