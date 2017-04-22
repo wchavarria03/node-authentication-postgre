@@ -18,12 +18,8 @@ module.exports = {
     message:'You need a username and password',
     code: 10
   },
-  'auth_noUser': {
-    message:'No user with the given username',
+  'auth_noUserFound': {
+    message:'No user found',
     code: 11
-  },
-  'auth_wrongPass': {
-    message:'Wrong Password',
-    code: 12
   }
 };

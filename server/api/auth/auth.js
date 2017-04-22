@@ -61,23 +61,16 @@ exports.verifyUser = () => {
     // if the passwords match for the username
     Admin.findOne({where: {username: username}})
       .then((admin) => {
-        if (!admin) {
+        if (!admin || !Admin.build({password: admin.password}).authenticate(password)) {
           res.status(401).send(
-            {errors : [{status:401, message: messages.auth_noUser.message, code: messages.auth_noUser.code}]}
+            {errors : [{status:401, message: messages.auth_noUserFound.message, code: messages.auth_noUserFound.code}]}
           );
         } else {
-          // checking the password here
-          if (!Admin.build({password: admin.password}).authenticate(password)) {
-            res.status(401).send(
-              {errors: [{status:401, message: messages.auth_wrongPass.message, code: messages.auth_wrongPass.code}]}
-            );
-          } else {
-            // if everything is good,
-            // and call next so the controller
-            // can sign a token from the req.user._id
-            req.admin = admin;
-            next();
-          }
+          // if everything is good,
+          // and call next so the controller
+          // can sign a token from the req.user._id
+          req.admin = admin;
+          next();
         }
       })
   };
