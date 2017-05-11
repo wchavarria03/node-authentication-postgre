@@ -35,18 +35,3 @@ module.exports = {
       .catch(admin => res.status(400).send(admin));
   }
 };
-
-// var User = require('./admin-model');
-// var _ = require('lodash');
-// var signToken = require('../../auth/auth').signToken;
-//
-// exports.params = function (req, res, next, id) {
-//   var user = User.findById(id);
-//   if(user){
-//     req.user = user;
-//     next();
-//   } else {
-//     next(new Error('No User with that id'))
-//   }
-// };
-//
