@@ -15,5 +15,9 @@
 
 #Run sequelize cli
 
-`node_modules/.bin/secuelize XXXX`
+Generic Command
+`node_modules/.bin/sequelize XXXX`
 
+Create Model Command Example
+
+`node_modules/.bin/sequelize model:create --name Todo --attributes "title:string, complete:boolean,UserId:integer"`

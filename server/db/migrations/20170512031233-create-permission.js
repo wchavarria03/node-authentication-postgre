@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
-  up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Admins', {
+  up: function(queryInterface, Sequelize) {
+    return queryInterface.createTable('Permission', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -10,19 +10,20 @@ module.exports = {
       },
       name: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
       },
-      identifier: {
-        type: Sequelize.STRING,
-        allowNull: false,
+      code: {
+        type: Sequelize.INTEGER,
+        allowNull: false
       },
-      username: {
+      description: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true
       },
-      password: {
-        type: Sequelize.STRING,
+      isActive: {
+        type: Sequelize.BOOLEAN,
         allowNull: false,
+        defaultValue: true
       },
       createdAt: {
         allowNull: false,
@@ -34,7 +35,7 @@ module.exports = {
       }
     });
   },
-  down: (queryInterface/*, Sequelize*/) => {
-    return queryInterface.dropTable('Admins');
+  down: function(queryInterface, Sequelize) {
+    return queryInterface.dropTable('Permission');
   }
 };

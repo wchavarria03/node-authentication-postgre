@@ -2,7 +2,7 @@
 const bcrypt = require('bcrypt');
 
 module.exports = (sequelize, DataTypes) => {
-  return sequelize.define('Admins', {
+  return sequelize.define('User', {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
   },{
     classMethods: {
       associate: (models) => {
-        // associations can be defined here
+        this.hasMany(models.Permission);
       }
     },
     instanceMethods: {

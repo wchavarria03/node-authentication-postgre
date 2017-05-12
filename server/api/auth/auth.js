@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const expressJwt = require('express-jwt');
 const config = require('../../config/config');
 const checkToken = expressJwt({ secret: config.secrets.jwt });
-const Admin = require('../admin/admin-model');
+const User = require('../user/user-model');
 const messages = require('../../utils/errorMessages');
 
 exports.decodeToken = () => {
@@ -23,9 +23,9 @@ exports.decodeToken = () => {
 
 exports.getFreshUser = () => {
   return (req, res, next) => {
-    Admin.findById(req.admin.id)
-      .then((admin) => {
-        if (!admin) {
+    User.findById(req.user.id)
+      .then((user) => {
+        if (!user) {
           // if no user is found it was not
           // it was a valid JWT but didn't decode
           // to a real user in our DB.
@@ -35,7 +35,7 @@ exports.getFreshUser = () => {
         } else {
           // update req.user with fresh user from
           // stale token data
-          req.admin = admin;
+          req.user = user;
           next();
         }
       });
@@ -59,9 +59,9 @@ exports.verifyUser = () => {
 
     // look user up in the DB so we can check
     // if the passwords match for the username
-    Admin.findOne({where: {username: username}})
-      .then((admin) => {
-        if (!admin || !Admin.build({password: admin.password}).authenticate(password)) {
+    User.findOne({where: {username: username}})
+      .then((user) => {
+        if (!user || !User.build({password: user.password}).authenticate(password)) {
           res.status(401).send(
             {errors : [{status:401, message: messages.auth_noUserFound.message, code: messages.auth_noUserFound.code}]}
           );
@@ -69,7 +69,7 @@ exports.verifyUser = () => {
           // if everything is good,
           // and call next so the controller
           // can sign a token from the req.user._id
-          req.admin = admin;
+          req.user = user;
           next();
         }
       })
