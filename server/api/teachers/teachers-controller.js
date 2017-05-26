@@ -17,7 +17,10 @@ module.exports = {
   get(req, res) {
     return Teachers
       .findAll()
-      .then(teachers => res.status(201).send(teachers))
+      //.then(teachers => res.status(201).send(teachers))
+      .then(function (teachers) {
+          return res.status(201).send(teachers);
+      })
       .catch(teachers => res.status(400).send(teachers));
   },
   getOne(req, res) {
