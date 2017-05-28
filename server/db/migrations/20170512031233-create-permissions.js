@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: function(queryInterface, Sequelize) {
-    return queryInterface.createTable('permission', {
+    return queryInterface.createTable('Permissions', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -20,22 +20,22 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true
       },
-      isActive: {
+      is_active: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
         defaultValue: true
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE
       }
     });
   },
   down: function(queryInterface, Sequelize) {
-    return queryInterface.dropTable('permission');
+    return queryInterface.dropTable('Permissions');
   }
 };

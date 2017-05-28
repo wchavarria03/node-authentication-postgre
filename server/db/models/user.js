@@ -1,8 +1,9 @@
 'use strict';
 const bcrypt = require('bcrypt');
+const Inventory = require('./inventory');
 
 module.exports = (sequelize, DataTypes) => {
-  return sequelize.define('user', {
+  const Users = sequelize.define('Users', {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -18,11 +19,20 @@ module.exports = (sequelize, DataTypes) => {
     password: {
       type: DataTypes.STRING,
       allowNull: false,
-    }
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   },{
+    underscored: true,
     classMethods: {
       associate: function (models) {
-        this.hasMany(models.permission);
+        this.hasMany(models.Inventories);
+        // this.belongsToMany(models.Inventories, {
+        //   through: 'UserInventory',
+        //   foreignKey: 'id'
+        // });
       }
     },
     instanceMethods: {
@@ -34,4 +44,6 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   });
+
+  return Users;
 };

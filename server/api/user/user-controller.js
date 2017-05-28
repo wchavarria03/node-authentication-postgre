@@ -29,7 +29,8 @@ module.exports = {
         name: req.body.name,
         identifier: req.body.identifier,
         username: req.body.username,
-        password: User.build().encryptPassword(req.body.password)
+        password: User.build().encryptPassword(req.body.password),
+        email: req.body.email
       })
       .then(user => res.status(201).send(user))
       .catch(user => res.status(400).send(user));

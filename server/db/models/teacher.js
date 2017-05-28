@@ -2,7 +2,7 @@
 const bcrypt = require('bcrypt');
 
 module.exports = (sequelize, DataTypes) => {
-  return sequelize.define('teacher', {
+  return sequelize.define('Teachers', {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     }
   },{
+    underscored: true,
     classMethods: {
       associate: (models) => {
         // associations can be defined here

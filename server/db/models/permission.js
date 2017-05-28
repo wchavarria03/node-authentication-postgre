@@ -1,6 +1,6 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('permission', {
+  return sequelize.define('Permissions', {
     name: {
       type: DataTypes.STRING,
       allowNull: false
@@ -19,10 +19,11 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: true
     }
   },{
+    underscored: true,
     classMethods: {
-      associate: function(models) {
-        this.hasMany(models.user);
-      }
+      // associate: function(models) {
+      //   this.hasMany(models.users);
+      // }
     }
   });
 };

@@ -1,1 +1,1 @@
-module.exports = require('../../db/models').teacher;
+module.exports = require('../../db/models').Teachers;
